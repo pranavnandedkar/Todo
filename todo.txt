@@ -1,0 +1,14 @@
+1. create scheduler trigger. 
+ @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        clearCacheDCC = taskExecutor();
+        scheduledTaskRegistrar.setScheduler(clearCacheDCC);
+        scheduledTaskRegistrar.addTriggerTask(
+                () -> clearCurrentlySkippedCache(),
+                triggerContext -> {
+                    return (new CronTrigger(cronForClearCurrentlySkippedCache)).nextExecutionTime(triggerContext);
+                });
+    }
+    
+   2. https://www.geeksforgeeks.org/java-8-streams-collectors-joining-method-with-examples/
+   
